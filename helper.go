@@ -7,14 +7,14 @@ type ImV1Msg struct {
 	MsgType string
 }
 
-func NewLarkTextMsg(text string) *ImV1Msg {
+func NewTextMsg(text string) *ImV1Msg {
 	return &ImV1Msg{
 		MsgType: MsgTypeText,
 		Content: buildImV1MessageTextContent(text),
 	}
 }
 
-func NewLarkCardMsg(content string) *ImV1Msg {
+func NewCardMsg(content string) *ImV1Msg {
 	return &ImV1Msg{
 		MsgType: MsgTypeCard,
 		Content: content,
