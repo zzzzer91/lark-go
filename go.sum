@@ -27,8 +27,8 @@ github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKs
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
 github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS4MhqMhdFk5YI=
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
-github.com/zzzzer91/httpgo v0.0.0-20230302043033-402a06e53806 h1:xhM45/FbD9PoR5LiR8AXjzS5aOs/mKDR/da+vO/MIIM=
-github.com/zzzzer91/httpgo v0.0.0-20230302043033-402a06e53806/go.mod h1:S1RThqxrxkxJGfPkWNxDnX/FL7C790eCTomqRyqEEo8=
+github.com/zzzzer91/httpgo v0.0.0-20230312110428-1383bc9cd76e h1:L2+dJfgxVZ2w6vno877+XeGMo1jH/bkiHQGg9E+wqv0=
+github.com/zzzzer91/httpgo v0.0.0-20230312110428-1383bc9cd76e/go.mod h1:S1RThqxrxkxJGfPkWNxDnX/FL7C790eCTomqRyqEEo8=
 github.com/zzzzer91/zlog v0.0.0-20230203160115-f19536fec2ba h1:a8G6escXWVWO7oG34WevK2bMLsVnqJaPptc653taMyw=
 github.com/zzzzer91/zlog v0.0.0-20230203160115-f19536fec2ba/go.mod h1:CwkMpZCPShHb678+hDxHxA7k/7+9GNfzZ2b8F+jy97A=
 golang.org/x/arch v0.0.0-20210923205945-b76863e36670/go.mod h1:5om86z9Hs0C8fWVUuoMHwpExlXzs5Tkyp9hOrfG7pp8=

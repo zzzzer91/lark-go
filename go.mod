@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/bytedance/sonic v1.8.3
 	github.com/pkg/errors v0.9.1
-	github.com/zzzzer91/httpgo v0.0.0-20230302043033-402a06e53806
+	github.com/zzzzer91/httpgo v0.0.0-20230312110428-1383bc9cd76e
 	github.com/zzzzer91/zlog v0.0.0-20230203160115-f19536fec2ba
 )
 
