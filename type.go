@@ -8,14 +8,17 @@ type (
 
 	fetchTenantAccessTokenResponse struct {
 		TenantAccessToken string `json:"tenant_access_token"`
-		Expire            int    `json:"expire"` // 默认两小时超时，但这个值必然大于30分钟，因为还有30分钟时，就会获取新token，同时老token继续生效
+		// The default expired period is two hours.
+		// When token's left duration is less than 30 minutes, service will return a new token.
+		// At the same time, the old token can be continue used before it's expired.
+		Expire int `json:"expire"`
 	}
 
-	// 使用顺序：chat_id > open_id > user_id > email，只会用一个
+	// refer: https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json
 	ImV1MessageRequest struct {
-		ReceiveID string `json:"receive_id,omitempty"` // 依据receive_id_type的值，填写对应的消息接收者id
-		MsgType   string `json:"msg_type"`             // 参考：https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json
-		Content   string `json:"content"`              // 消息内容，json结构，同上
+		ReceiveID string `json:"receive_id,omitempty"`
+		MsgType   string `json:"msg_type"`
+		Content   string `json:"content"`
 	}
 
 	ImV1MessageResponse struct {
@@ -53,10 +56,9 @@ type (
 )
 
 type (
-	// EventSubscriptionMessage 接受 lark 机器人消息回调
-	// 字段含义见：https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/events/receive
+	// refer: https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/events/receive
 	EventSubscriptionMessage struct {
-		Type      string `json:"type"` // 用于判断 challenge
+		Type      string `json:"type"`
 		Challenge string `json:"challenge"`
 		Schema    string `json:"schema"`
 		Header    struct {

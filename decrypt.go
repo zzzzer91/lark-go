@@ -1,5 +1,3 @@
-// 解密 lark 发过来的消息
-
 package lark
 
 import (
@@ -13,7 +11,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Decrypt 解密飞书加密事件消息
+// Decrypt decrypt lark event
 func Decrypt(payload []byte, key string) ([]byte, error) {
 	var d struct {
 		Encrypt string `json:"encrypt"`

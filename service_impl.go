@@ -14,27 +14,28 @@ import (
 )
 
 type serviceImpl struct {
+	cli               *httpgo.Client
 	appID             string
 	appSecret         string
 	tenantAccessToken atomic.Value
 }
 
-// fetchTenantAccessToken 获取企业自建应用token
+// fetchTenantAccessToken get tenant access token
 // https://open.feishu.cn/document/ukTMukTMukTM/ukDNz4SO0MjL5QzM/auth-v3/auth/tenant_access_token_internal
 func (s *serviceImpl) fetchTenantAccessToken() (*fetchTenantAccessTokenResponse, error) {
 	req := &fetchTenantAccessTokenRequest{
 		AppID:     s.appID,
 		AppSecret: s.appSecret,
 	}
-	resp, err := httpgo.PostJSON(urlTenantAccessToken, req)
+	resp, err := s.cli.PostJSON(urlTenantAccessToken, req)
 	if err != nil {
-		return nil, errors.Wrap(err, "http_client.PostJSON error")
+		return nil, errors.Wrap(err, "PostJSON error")
 	}
 	defer resp.Body.Close()
 	result := &fetchTenantAccessTokenResponse{}
 	err = sonic.ConfigDefault.NewDecoder(resp.Body).Decode(result)
 	if err != nil {
-		return nil, errors.Wrap(err, "Decode error")
+		return nil, errors.Wrap(err, "json unmarshal error")
 	}
 
 	return result, nil
@@ -61,11 +62,11 @@ func (s *serviceImpl) refreshTenantAccessTokenRegularly() error {
 		for range t.C {
 			expire, err := s.fetchAndSetTenantAccessToken()
 			if err != nil {
-				// 重试
+				// retry
 				zlog.Ctx(context.Background()).WithError(err).Error()
 				t.Reset(time.Minute)
 			} else {
-				// 提前20分钟刷新
+				// refresh 20 minutes in advance
 				t.Reset((expire - 20*60) * time.Second)
 			}
 		}
@@ -84,9 +85,9 @@ func (s *serviceImpl) postImV1Message(url, receiveID string, msg *ImV1Msg) (*ImV
 		MsgType:   msg.MsgType,
 		Content:   msg.Content,
 	}
-	resp, err := httpgo.PostJsonWithAuth(url, req, token)
+	resp, err := s.cli.PostJsonWithAuth(url, req, token)
 	if err != nil {
-		return nil, errors.Wrap(err, "http_client.PostJsonWithAuth error")
+		return nil, errors.Wrap(err, "PostJsonWithAuth error")
 	}
 	defer resp.Body.Close()
 	var result ImV1MessageResponse
@@ -105,11 +106,11 @@ func (s *serviceImpl) RelayMsgByMsgID(msgID string, msg *ImV1Msg) (*ImV1MessageR
 }
 
 func (s *serviceImpl) SendMsgByOpenID(openID string, msg *ImV1Msg) (*ImV1MessageResponse, error) {
-	url := fmt.Sprintf("%s?receive_id_type=%s", urlImV1Messages, msgReceiveIdTypeOpenID)
+	url := urlImV1Messages + "?receive_id_type=" + msgReceiveIdTypeOpenID
 	return s.postImV1Message(url, openID, msg)
 }
 
 func (s *serviceImpl) SendMsgByChatID(chatID string, msg *ImV1Msg) (*ImV1MessageResponse, error) {
-	url := fmt.Sprintf("%s?receive_id_type=%s", urlImV1Messages, msgReceiveIdTypeChatID)
+	url := urlImV1Messages + "?receive_id_type=" + msgReceiveIdTypeChatID
 	return s.postImV1Message(url, chatID, msg)
 }
