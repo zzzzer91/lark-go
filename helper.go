@@ -31,12 +31,12 @@ func buildImV1MessageTextContent(text string) string {
 	return string(res)
 }
 
-func IsChallengeStage(req *EventSubscriptionMessage) bool {
-	return req.Type == msgTypeChallengeFlag
+func IsChallengeStage(tp string) bool {
+	return tp == MsgTypeChallengeFlag
 }
 
-func NewEventSubscriptionMessageChallengeResponse(req *EventSubscriptionMessage) *EventSubscriptionMessageChallengeResponse {
+func NewEventSubscriptionMessageChallengeResponse(challenge string) *EventSubscriptionMessageChallengeResponse {
 	return &EventSubscriptionMessageChallengeResponse{
-		Challenge: req.Challenge,
+		Challenge: challenge,
 	}
 }

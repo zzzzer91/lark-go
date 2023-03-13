@@ -9,7 +9,7 @@ const (
 )
 
 const (
-	msgTypeChallengeFlag = "url_verification"
+	MsgTypeChallengeFlag = "url_verification"
 )
 
 const (
