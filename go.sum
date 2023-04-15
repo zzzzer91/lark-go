@@ -1,4 +1,3 @@
-github.com/BurntSushi/toml v1.2.0 h1:Rt8g24XnyGTyglgET/PRUNlrUeu9F5L+7FilkXfZgs0=
 github.com/bytedance/sonic v1.5.0/go.mod h1:ED5hyg4y6t3/9Ku1R6dU/4KyJ48DZ4jPhfY1O2AihPM=
 github.com/bytedance/sonic v1.8.3 h1:pf6fGl5eqWYKkx1RcD4qpuX+BIUaduv/wTm5ekWJ80M=
 github.com/bytedance/sonic v1.8.3/go.mod h1:i736AoUSYt75HyZLoJW9ERYxcy6eaN6h4BZXU064P/U=
@@ -27,10 +26,8 @@ github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKs
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
 github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS4MhqMhdFk5YI=
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
-github.com/zzzzer91/httpgo v0.0.0-20230312110428-1383bc9cd76e h1:L2+dJfgxVZ2w6vno877+XeGMo1jH/bkiHQGg9E+wqv0=
-github.com/zzzzer91/httpgo v0.0.0-20230312110428-1383bc9cd76e/go.mod h1:S1RThqxrxkxJGfPkWNxDnX/FL7C790eCTomqRyqEEo8=
-github.com/zzzzer91/zlog v0.0.0-20230203160115-f19536fec2ba h1:a8G6escXWVWO7oG34WevK2bMLsVnqJaPptc653taMyw=
-github.com/zzzzer91/zlog v0.0.0-20230203160115-f19536fec2ba/go.mod h1:CwkMpZCPShHb678+hDxHxA7k/7+9GNfzZ2b8F+jy97A=
+github.com/zzzzer91/httpgo v1.0.0 h1:aSZaeyXSgeq71a+fZmnHuwXp+UP6FDbqYaa/4zOhB6s=
+github.com/zzzzer91/httpgo v1.0.0/go.mod h1:S1RThqxrxkxJGfPkWNxDnX/FL7C790eCTomqRyqEEo8=
 golang.org/x/arch v0.0.0-20210923205945-b76863e36670/go.mod h1:5om86z9Hs0C8fWVUuoMHwpExlXzs5Tkyp9hOrfG7pp8=
 golang.org/x/arch v0.0.0-20220722155209-00200b7164a7 h1:VBQqJMNMRfQsWSiCTLgz9XjAfWlgnJAPv8nsp1HF8Tw=
 golang.org/x/arch v0.0.0-20220722155209-00200b7164a7/go.mod h1:5om86z9Hs0C8fWVUuoMHwpExlXzs5Tkyp9hOrfG7pp8=
@@ -39,9 +36,6 @@ golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8/go.mod h1:oPkhp1MJrh7nUepCBc
 golang.org/x/sys v0.0.0-20220927170352-d9d178bc13c6 h1:cy1ko5847T/lJ45eyg/7uLprIE/amW5IXxGtEnQdYMI=
 golang.org/x/sys v0.0.0-20220927170352-d9d178bc13c6/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
-gopkg.in/natefinch/lumberjack.v2 v2.0.0 h1:1Lc07Kr7qY4U2YPouBjpCLxpiyxIVoxqXgkXLknAOE8=
-gopkg.in/natefinch/lumberjack.v2 v2.0.0/go.mod h1:l0ndWWf7gzL7RNwBG7wST/UCcT4T24xpD6X8LsfU/+k=
-gopkg.in/yaml.v2 v2.4.0 h1:D8xgwECY7CYvx+Y2n4sBz93Jn9JRvxdiyyo8CTfuKaY=
 gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
 gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=

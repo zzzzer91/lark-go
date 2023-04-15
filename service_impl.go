@@ -1,7 +1,6 @@
 package lark
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"sync/atomic"
@@ -10,7 +9,6 @@ import (
 	"github.com/bytedance/sonic"
 	"github.com/pkg/errors"
 	"github.com/zzzzer91/httpgo"
-	"github.com/zzzzer91/zlog"
 )
 
 type serviceImpl struct {
@@ -46,7 +44,6 @@ func (s *serviceImpl) fetchAndSetTenantAccessToken() (time.Duration, error) {
 	if err != nil {
 		return 0, err
 	}
-	zlog.Ctx(context.Background()).Infof("fetchTenantAccessToken: %#v", res)
 	s.tenantAccessToken.Store("Bearer " + res.TenantAccessToken)
 	return time.Duration(res.Expire), nil
 }
@@ -63,7 +60,7 @@ func (s *serviceImpl) refreshTenantAccessTokenRegularly() error {
 			expire, err := s.fetchAndSetTenantAccessToken()
 			if err != nil {
 				// retry
-				zlog.Ctx(context.Background()).WithError(err).Error()
+				logger.Error(err)
 				t.Reset(time.Minute)
 			} else {
 				// refresh 20 minutes in advance
