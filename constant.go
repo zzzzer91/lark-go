@@ -3,9 +3,9 @@ package lark
 // lark open api URL
 const (
 	urlBasic                     = "https://open.feishu.cn/open-apis"
-	urlTenantAccessToken         = urlBasic + "/auth/v3/tenant_access_token/internal" // 获取token
-	urlImV1Messages              = urlBasic + "/im/v1/messages"                       // 发送消息接口
-	urlImV1MessagesRelayTemplate = urlBasic + "/im/v1/messages/%s/reply"              // 发送回复消息接口
+	urlTenantAccessToken         = urlBasic + "/auth/v3/tenant_access_token/internal" // Getting token API
+	urlImV1Messages              = urlBasic + "/im/v1/messages"                       // Sending Message API
+	urlImV1MessagesRelayTemplate = urlBasic + "/im/v1/messages/%s/reply"              // Reply Message API
 )
 
 const (
