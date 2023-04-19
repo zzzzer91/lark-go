@@ -2,20 +2,15 @@ package lark
 
 import "github.com/bytedance/sonic"
 
-type ImV1Msg struct {
-	Content string
-	MsgType string
-}
-
-func NewTextMsg(text string) *ImV1Msg {
-	return &ImV1Msg{
+func NewTextMsg(text string) *ImMsg {
+	return &ImMsg{
 		MsgType: MsgTypeText,
 		Content: buildImV1MessageTextContent(text),
 	}
 }
 
-func NewCardMsg(content string) *ImV1Msg {
-	return &ImV1Msg{
+func NewCardMsg(content string) *ImMsg {
+	return &ImMsg{
 		MsgType: MsgTypeCard,
 		Content: content,
 	}

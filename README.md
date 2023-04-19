@@ -6,6 +6,6 @@ usage:
 
 ```go
 appID, appSecret := "", ""
-larkService := lark.NewService(appID, appSecret)
+larkService := lark.NewService(appID, appSecret, time.Second*5)
 larkService.SendMsgByOpenID("openID", lark.NewTextMsg("hello"))
 ```
