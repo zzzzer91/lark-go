@@ -26,7 +26,7 @@ type (
 		Data struct {
 			Items     []*Block `json:"items,omitempty"`      // block 的 children 列表
 			PageToken *string  `json:"page_token,omitempty"` // 下一个分页的分页标记
-			HasMore   bool    `json:"has_more,omitempty"`   // 是否还有下一个分页
+			HasMore   bool     `json:"has_more,omitempty"`   // 是否还有下一个分页
 		} `json:"data"`
 	}
 )
@@ -87,6 +87,83 @@ const (
 
 // DocxCodeLanguage 代码块语言
 type DocxCodeLanguage int64
+
+func (code DocxCodeLanguage) String() string {
+	if int(code) >= len(docxCodeLang2MdStr) {
+		return ""
+	}
+	return docxCodeLang2MdStr[code]
+}
+
+var docxCodeLang2MdStr = [...]string{
+	DocxCodeLanguagePlainText:    "",
+	DocxCodeLanguageABAP:         "abap",
+	DocxCodeLanguageAda:          "ada",
+	DocxCodeLanguageApache:       "apache",
+	DocxCodeLanguageApex:         "apex",
+	DocxCodeLanguageAssembly:     "assembly",
+	DocxCodeLanguageBash:         "bash",
+	DocxCodeLanguageCSharp:       "csharp",
+	DocxCodeLanguageCPlusPlus:    "cpp",
+	DocxCodeLanguageC:            "c",
+	DocxCodeLanguageCOBOL:        "cobol",
+	DocxCodeLanguageCSS:          "css",
+	DocxCodeLanguageCoffeeScript: "coffeescript",
+	DocxCodeLanguageD:            "d",
+	DocxCodeLanguageDart:         "dart",
+	DocxCodeLanguageDelphi:       "delphi",
+	DocxCodeLanguageDjango:       "django",
+	DocxCodeLanguageDockerfile:   "dockerfile",
+	DocxCodeLanguageErlang:       "erlang",
+	DocxCodeLanguageFortran:      "fortran",
+	DocxCodeLanguageFoxPro:       "foxpro",
+	DocxCodeLanguageGo:           "go",
+	DocxCodeLanguageGroovy:       "groovy",
+	DocxCodeLanguageHTML:         "html",
+	DocxCodeLanguageHTMLBars:     "htmlbars",
+	DocxCodeLanguageHTTP:         "http",
+	DocxCodeLanguageHaskell:      "haskell",
+	DocxCodeLanguageJSON:         "json",
+	DocxCodeLanguageJava:         "java",
+	DocxCodeLanguageJavaScript:   "javascript",
+	DocxCodeLanguageJulia:        "julia",
+	DocxCodeLanguageKotlin:       "kotlin",
+	DocxCodeLanguageLateX:        "latex",
+	DocxCodeLanguageLisp:         "lisp",
+	DocxCodeLanguageLogo:         "logo",
+	DocxCodeLanguageLua:          "lua",
+	DocxCodeLanguageMATLAB:       "matlab",
+	DocxCodeLanguageMakefile:     "makefile",
+	DocxCodeLanguageMarkdown:     "markdown",
+	DocxCodeLanguageNginx:        "nginx",
+	DocxCodeLanguageObjective:    "objectivec",
+	DocxCodeLanguageOpenEdgeABL:  "openedge-abl",
+	DocxCodeLanguagePHP:          "php",
+	DocxCodeLanguagePerl:         "perl",
+	DocxCodeLanguagePostScript:   "postscript",
+	DocxCodeLanguagePower:        "powershell",
+	DocxCodeLanguageProlog:       "prolog",
+	DocxCodeLanguageProtoBuf:     "protobuf",
+	DocxCodeLanguagePython:       "python",
+	DocxCodeLanguageR:            "r",
+	DocxCodeLanguageRPG:          "rpg",
+	DocxCodeLanguageRuby:         "ruby",
+	DocxCodeLanguageRust:         "rust",
+	DocxCodeLanguageSAS:          "sas",
+	DocxCodeLanguageSCSS:         "scss",
+	DocxCodeLanguageSQL:          "sql",
+	DocxCodeLanguageScala:        "scala",
+	DocxCodeLanguageScheme:       "scheme",
+	DocxCodeLanguageScratch:      "scratch",
+	DocxCodeLanguageShell:        "shell",
+	DocxCodeLanguageSwift:        "swift",
+	DocxCodeLanguageThrift:       "thrift",
+	DocxCodeLanguageTypeScript:   "typescript",
+	DocxCodeLanguageVBScript:     "vbscript",
+	DocxCodeLanguageVisual:       "vbnet",
+	DocxCodeLanguageXML:          "xml",
+	DocxCodeLanguageYAML:         "yaml",
+}
 
 const (
 	DocxCodeLanguagePlainText    DocxCodeLanguage = 1  // PlainText
@@ -162,7 +239,7 @@ type (
 	Block struct {
 		BlockId        string          `json:"block_id,omitempty"`        // Block 唯一标识
 		BlockType      DocxBlockType   `json:"block_type,omitempty"`      // block 类型
-		ParentId       string         `json:"parent_id,omitempty"`       // block 的父亲 id
+		ParentId       string          `json:"parent_id,omitempty"`       // block 的父亲 id
 		Children       []string        `json:"children,omitempty"`        // block 的孩子 id 列表
 		Page           *Text           `json:"page,omitempty"`            // 文档 Block
 		Text           *Text           `json:"text,omitempty"`            // 文本 Block
@@ -249,9 +326,9 @@ type (
 	}
 
 	Image struct {
-		Width  *int    `json:"width,omitempty"`  // 宽度单位 px
-		Height *int    `json:"height,omitempty"` // 高度
-		Token  *string `json:"token,omitempty"`  // 图片 Token
+		Width  int    `json:"width,omitempty"`  // 宽度单位 px
+		Height int    `json:"height,omitempty"` // 高度
+		Token  string `json:"token,omitempty"`  // 图片 Token
 	}
 
 	Isv struct {
@@ -296,7 +373,7 @@ type (
 
 type (
 	TextStyle struct {
-		Align    *DocxAlign         `json:"align,omitempty"`    // 对齐方式
+		Align    *DocxAlign        `json:"align,omitempty"`    // 对齐方式
 		Done     *bool             `json:"done,omitempty"`     // todo 的完成状态
 		Folded   *bool             `json:"folded,omitempty"`   // 文本的折叠状态
 		Language *DocxCodeLanguage `json:"language,omitempty"` // 代码块语言
@@ -315,7 +392,7 @@ type (
 	}
 
 	TextRun struct {
-		Content          string           `json:"content,omitempty"`            // 文本内容
+		Content          string            `json:"content,omitempty"`            // 文本内容
 		TextElementStyle *TextElementStyle `json:"text_element_style,omitempty"` // 文本局部样式
 	}
 
@@ -361,11 +438,11 @@ type (
 	}
 
 	TextElementStyle struct {
-		Bold            bool    `json:"bold,omitempty"`             // 加粗
-		Italic          bool    `json:"italic,omitempty"`           // 斜体
-		Strikethrough   bool    `json:"strikethrough,omitempty"`    // 删除线
-		Underline       bool    `json:"underline,omitempty"`        // 下划线
-		InlineCode      bool    `json:"inline_code,omitempty"`      // inline 代码
+		Bold            bool     `json:"bold,omitempty"`             // 加粗
+		Italic          bool     `json:"italic,omitempty"`           // 斜体
+		Strikethrough   bool     `json:"strikethrough,omitempty"`    // 删除线
+		Underline       bool     `json:"underline,omitempty"`        // 下划线
+		InlineCode      bool     `json:"inline_code,omitempty"`      // inline 代码
 		BackgroundColor *int     `json:"background_color,omitempty"` // 背景色
 		TextColor       *int     `json:"text_color,omitempty"`       // 字体颜色
 		Link            *Link    `json:"link,omitempty"`             // 链接
@@ -379,8 +456,8 @@ type (
 
 type (
 	TableProperty struct {
-		RowSize     *int              `json:"row_size,omitempty"`     // 行数
-		ColumnSize  *int              `json:"column_size,omitempty"`  // 列数
+		RowSize     int              `json:"row_size,omitempty"`     // 行数
+		ColumnSize  int              `json:"column_size,omitempty"`  // 列数
 		ColumnWidth []int             `json:"column_width,omitempty"` // 列宽，单位px
 		MergeInfo   []*TableMergeInfo `json:"merge_info,omitempty"`   // 单元格合并信息
 	}
