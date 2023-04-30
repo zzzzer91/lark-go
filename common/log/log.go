@@ -1,10 +1,10 @@
-package lark
+package log
 
 import (
 	"github.com/sirupsen/logrus"
 )
 
-var logger = func() *logrus.Logger {
+var Logger = func() *logrus.Logger {
 	l := logrus.New()
 	l.SetReportCaller(true)
 	l.SetLevel(logrus.InfoLevel)

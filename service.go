@@ -3,37 +3,25 @@ package lark
 import (
 	"time"
 
-	"github.com/zzzzer91/httpgo"
+	lark_core "github.com/zzzzer91/lark-go/core"
+	lark_docx "github.com/zzzzer91/lark-go/service/docx/v1"
+	lark_im "github.com/zzzzer91/lark-go/service/im/v1"
 )
 
-type ImV1Iface interface {
-	RelayMsgByMsgID(msgID string, msg *ImMsg) (*ImMsgResponse, error)
-	SendMsgByOpenID(openID string, msg *ImMsg) (*ImMsgResponse, error)
-	SendMsgByChatID(chatID string, msg *ImMsg) (*ImMsgResponse, error)
+type LarkService interface {
+	lark_im.ImService
+	lark_docx.DocxService
 }
 
-type DocxV1Iface interface {
-	GetDocxBasicInfo(documentId string) (*DocxBasicInfoResponse, error)
-	GetDocxRawContent(documentId string) (*DocxRawContentResponse, error)
+func NewService(appID, appSecret string, timeout time.Duration) LarkService {
+	cli := lark_core.NewClient(appID, appSecret, timeout)
+	return &larkServiceImpl{
+		ImService:   lark_im.NewService(cli),
+		DocxService: lark_docx.NewService(cli),
+	}
 }
 
-type Service interface {
-	ImV1Iface
-	DocxV1Iface
-}
-
-func NewService(appID, appSecret string, timeout time.Duration) Service {
-	lc := &larkClient{
-		cli:       httpgo.NewClient(timeout, nil),
-		appID:     appID,
-		appSecret: appSecret,
-	}
-	err := lc.refreshTenantAccessTokenRegularly()
-	if err != nil {
-		panic(err)
-	}
-	s := &serviceImpl{
-		lc: lc,
-	}
-	return s
+type larkServiceImpl struct {
+	lark_im.ImService
+	lark_docx.DocxService
 }

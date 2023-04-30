@@ -1,4 +1,4 @@
-package lark
+package lark_im
 
 import "github.com/bytedance/sonic"
 
@@ -24,14 +24,4 @@ func buildImV1MessageTextContent(text string) string {
 	}
 	res, _ := sonic.Marshal(content)
 	return string(res)
-}
-
-func IsChallengeStage(tp string) bool {
-	return tp == MsgTypeChallengeFlag
-}
-
-func NewEventSubscriptionMessageChallengeResponse(challenge string) *EventSubscriptionMessageChallengeResponse {
-	return &EventSubscriptionMessageChallengeResponse{
-		Challenge: challenge,
-	}
 }
