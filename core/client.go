@@ -70,7 +70,7 @@ func (lc *Client) refreshTenantAccessTokenRegularly() error {
 			expire, err := lc.fetchAndSetTenantAccessToken()
 			if err != nil {
 				// retry
-				logx.Errorln(err)
+				logx.Error(err)
 				t.Reset(time.Minute)
 			} else {
 				// refresh 20 minutes in advance

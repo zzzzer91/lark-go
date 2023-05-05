@@ -9,7 +9,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.8.1
-	github.com/zzzzer91/gopkg v0.0.0-20230505032855-a3cb107cfc02
+	github.com/zzzzer91/gopkg v0.0.0-20230505041801-df9aeca8ee0a
 	github.com/zzzzer91/httpgo v1.0.0
 )
 
