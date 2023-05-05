@@ -9,7 +9,7 @@ import (
 	"github.com/elliotchance/orderedmap"
 	strip "github.com/grokify/html-strip-tags-go"
 	"github.com/olekukonko/tablewriter"
-	"github.com/zzzzer91/lark-go/common/url"
+	"github.com/zzzzer91/gopkg/urlx"
 	lark_docx "github.com/zzzzer91/lark-go/service/docx/v1"
 )
 
@@ -181,7 +181,7 @@ func (p *Parser) ParseDocxTextElement(e *lark_docx.TextElement) string {
 		buf.WriteString(*e.MentionUser.UserId)
 	}
 	if e.MentionDoc != nil {
-		buf.WriteString(fmt.Sprintf("[%s](%s)", *e.MentionDoc.Title, url.UnescapeURL(*e.MentionDoc.Url)))
+		buf.WriteString(fmt.Sprintf("[%s](%s)", *e.MentionDoc.Title, urlx.UnescapeURL(*e.MentionDoc.Url)))
 	}
 	if e.Equation != nil {
 		buf.WriteString("$$" + strings.TrimSuffix(*e.Equation.Content, "\n") + "$$")
@@ -211,7 +211,7 @@ func (p *Parser) ParseDocxTextElementTextRun(tr *lark_docx.TextRun) string {
 			postWrite = "`"
 		} else if link := style.Link; link != nil {
 			buf.WriteString("[")
-			postWrite = fmt.Sprintf("](%s)", url.UnescapeURL(*link.Url))
+			postWrite = fmt.Sprintf("](%s)", urlx.UnescapeURL(*link.Url))
 		}
 	}
 	buf.WriteString(tr.Content)

@@ -4,10 +4,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/pkg/errors"
+	"github.com/zzzzer91/gopkg/logx"
 	"github.com/zzzzer91/httpgo"
 	"github.com/zzzzer91/lark-go/common/json"
-	"github.com/zzzzer91/lark-go/common/log"
 )
 
 type Client struct {
@@ -39,7 +38,7 @@ func (lc *Client) fetchTenantAccessToken() (*fetchTenantAccessTokenResponse, err
 	}
 	resp, err := lc.cli.PostJSON(urlTenantAccessToken, req)
 	if err != nil {
-		return nil, errors.Wrap(err, "PostJSON error")
+		return nil, err
 	}
 	defer resp.Body.Close()
 	result := new(fetchTenantAccessTokenResponse)
@@ -71,7 +70,7 @@ func (lc *Client) refreshTenantAccessTokenRegularly() error {
 			expire, err := lc.fetchAndSetTenantAccessToken()
 			if err != nil {
 				// retry
-				log.Logger.Error(err)
+				logx.Errorln(err)
 				t.Reset(time.Minute)
 			} else {
 				// refresh 20 minutes in advance
