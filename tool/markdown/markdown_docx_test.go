@@ -1,6 +1,7 @@
 package lark_markdown
 
 import (
+	"context"
 	"os"
 	"testing"
 	"time"
@@ -15,7 +16,7 @@ func TestGetDocBasicInfo(t *testing.T) {
 	cli := lark_core.NewClient(appID, appSecret, time.Second*5)
 	svc := lark_docx.NewService(cli)
 	docId := ""
-	res, err := svc.GetDocxBlocks(docId)
+	res, err := svc.GetDocxBlocks(context.Background(), docId)
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
 	p := NewParser()

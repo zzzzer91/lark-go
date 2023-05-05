@@ -1,6 +1,7 @@
 package lark_core
 
 import (
+	"context"
 	"sync/atomic"
 	"time"
 
@@ -36,7 +37,7 @@ func (lc *Client) fetchTenantAccessToken() (*fetchTenantAccessTokenResponse, err
 		AppID:     lc.appID,
 		AppSecret: lc.appSecret,
 	}
-	resp, err := lc.cli.PostJSON(urlTenantAccessToken, req)
+	resp, err := lc.cli.PostJSON(context.Background(), urlTenantAccessToken, req)
 	if err != nil {
 		return nil, err
 	}
@@ -85,8 +86,8 @@ func (lc *Client) getTenantAccessToken() string {
 	return lc.tenantAccessToken.Load().(string)
 }
 
-func (lc *Client) GetJson(url string, out json.CodeMsgIface) error {
-	resp, err := lc.cli.GetJsonWithAuth(url, lc.getTenantAccessToken())
+func (lc *Client) GetJson(ctx context.Context, url string, out json.CodeMsgIface) error {
+	resp, err := lc.cli.GetJsonWithAuth(ctx, url, lc.getTenantAccessToken())
 	if err != nil {
 		return err
 	}
@@ -97,8 +98,8 @@ func (lc *Client) GetJson(url string, out json.CodeMsgIface) error {
 	return nil
 }
 
-func (lc *Client) PostJson(url string, data interface{}, out json.CodeMsgIface) error {
-	resp, err := lc.cli.PostJsonWithAuth(url, data, lc.getTenantAccessToken())
+func (lc *Client) PostJson(ctx context.Context, url string, data interface{}, out json.CodeMsgIface) error {
+	resp, err := lc.cli.PostJsonWithAuth(ctx, url, data, lc.getTenantAccessToken())
 	if err != nil {
 		return err
 	}
