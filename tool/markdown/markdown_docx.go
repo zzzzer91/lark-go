@@ -195,11 +195,11 @@ func (p *Parser) ParseDocxTextElementTextRun(tr *lark_docx.TextRun) string {
 	postWrite := ""
 	if style := tr.TextElementStyle; style != nil {
 		if style.Bold {
-			buf.WriteString("<strong>")
-			postWrite = "</strong>"
+			buf.WriteString("**")
+			postWrite = "**"
 		} else if style.Italic {
-			buf.WriteString("<em>")
-			postWrite = "</em>"
+			buf.WriteString("*")
+			postWrite = "*"
 		} else if style.Strikethrough {
 			buf.WriteString("<del>")
 			postWrite = "</del>"
