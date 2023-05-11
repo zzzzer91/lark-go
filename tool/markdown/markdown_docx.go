@@ -248,7 +248,7 @@ func (p *Parser) ParseDocxBlockTableCell(blockId string) string {
 		// remove table cell children block from map
 		p.blockMap.Delete(block.BlockId)
 	}
-	return contents
+	return strings.TrimSpace(contents)
 }
 
 func (p *Parser) ParseDocxBlockTable(documentId string, t *lark_docx.Table) string {
