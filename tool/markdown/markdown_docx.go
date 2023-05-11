@@ -136,6 +136,7 @@ func (p *Parser) ParseDocxBlock(b *lark_docx.Block) string {
 	case lark_docx.DocxBlockTypeQuote:
 		buf.WriteString("> ")
 		buf.WriteString(p.ParseDocxBlockText(b.Quote))
+		buf.WriteString("\n")
 	case lark_docx.DocxBlockTypeEquation:
 		buf.WriteString("$$\n")
 		buf.WriteString(p.ParseDocxBlockText(b.Equation))
