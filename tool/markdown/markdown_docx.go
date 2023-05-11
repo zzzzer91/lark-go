@@ -74,31 +74,31 @@ func (p *Parser) ParseDocxBlock(b *lark_docx.Block) string {
 	case lark_docx.DocxBlockTypeText:
 		return p.ParseDocxBlockText(b.Text)
 	case lark_docx.DocxBlockTypeHeading1:
-		buf.WriteString("# ")
+		buf.WriteString("## ")
 		buf.WriteString(p.ParseDocxBlockText(b.Heading1))
 	case lark_docx.DocxBlockTypeHeading2:
-		buf.WriteString("## ")
+		buf.WriteString("### ")
 		buf.WriteString(p.ParseDocxBlockText(b.Heading2))
 	case lark_docx.DocxBlockTypeHeading3:
-		buf.WriteString("### ")
+		buf.WriteString("#### ")
 		buf.WriteString(p.ParseDocxBlockText(b.Heading3))
 	case lark_docx.DocxBlockTypeHeading4:
-		buf.WriteString("#### ")
+		buf.WriteString("##### ")
 		buf.WriteString(p.ParseDocxBlockText(b.Heading4))
 	case lark_docx.DocxBlockTypeHeading5:
-		buf.WriteString("##### ")
+		buf.WriteString("###### ")
 		buf.WriteString(p.ParseDocxBlockText(b.Heading5))
 	case lark_docx.DocxBlockTypeHeading6:
-		buf.WriteString("###### ")
+		buf.WriteString("####### ")
 		buf.WriteString(p.ParseDocxBlockText(b.Heading6))
 	case lark_docx.DocxBlockTypeHeading7:
-		buf.WriteString("####### ")
+		buf.WriteString("######## ")
 		buf.WriteString(p.ParseDocxBlockText(b.Heading7))
 	case lark_docx.DocxBlockTypeHeading8:
-		buf.WriteString("######## ")
+		buf.WriteString("######### ")
 		buf.WriteString(p.ParseDocxBlockText(b.Heading8))
 	case lark_docx.DocxBlockTypeHeading9:
-		buf.WriteString("######### ")
+		buf.WriteString("########## ")
 		buf.WriteString(p.ParseDocxBlockText(b.Heading9))
 	case lark_docx.DocxBlockTypeBullet:
 		// calculate indent level
@@ -204,8 +204,7 @@ func (p *Parser) ParseDocxTextElementTextRun(tr *lark_docx.TextRun) string {
 			buf.WriteString("~~")
 			postWrite = "~~"
 		} else if style.Underline {
-			buf.WriteString("<u>")
-			postWrite = "</u>"
+			// ignore underline
 		} else if style.InlineCode {
 			buf.WriteString("`")
 			postWrite = "`"
