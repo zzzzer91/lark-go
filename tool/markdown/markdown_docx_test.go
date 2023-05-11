@@ -19,8 +19,7 @@ func TestGetDocBasicInfo(t *testing.T) {
 	res, err := svc.GetDocxBlocks(context.Background(), docId)
 	assert.Nil(t, err)
 	assert.NotNil(t, res)
-	p := NewParser()
-	s := p.ParseDocxContent(res.Data.Items)
+	s, _ := ParseDocxContent(res.Data.Items)
 	f, _ := os.OpenFile("test.md", os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
 	f.Write([]byte(s))
 }
