@@ -7,7 +7,6 @@ import (
 	"sync"
 
 	"github.com/elliotchance/orderedmap"
-	strip "github.com/grokify/html-strip-tags-go"
 	"github.com/olekukonko/tablewriter"
 	"github.com/zzzzer91/gopkg/urlx"
 	lark_docx "github.com/zzzzer91/lark-go/service/docx/v1"
@@ -105,13 +104,14 @@ func (p *Parser) ParseDocxBlock(b *lark_docx.Block) string {
 		indentLevel := 1
 		parent := p.blockMap.GetOrDefault(b.ParentId, nil)
 		for {
-			if parent == nil || parent.(*lark_docx.Block).BlockType != lark_docx.DocxBlockTypeBullet {
+			if parent == nil || (parent.(*lark_docx.Block).BlockType != lark_docx.DocxBlockTypeBullet &&
+				parent.(*lark_docx.Block).BlockType != lark_docx.DocxBlockTypeOrdered) {
 				break
 			}
 			indentLevel += 1
 			parent = p.blockMap.GetOrDefault(parent.(*lark_docx.Block).ParentId, nil)
 		}
-		buf.WriteString(strings.Repeat("  ", indentLevel-1))
+		buf.WriteString(strings.Repeat("    ", indentLevel-1))
 		buf.WriteString("- ")
 		buf.WriteString(p.ParseDocxBlockText(b.Bullet))
 	case lark_docx.DocxBlockTypeOrdered:
@@ -119,13 +119,14 @@ func (p *Parser) ParseDocxBlock(b *lark_docx.Block) string {
 		indentLevel := 1
 		parent := p.blockMap.GetOrDefault(b.ParentId, nil)
 		for {
-			if parent == nil || parent.(*lark_docx.Block).BlockType != lark_docx.DocxBlockTypeOrdered {
+			if parent == nil || (parent.(*lark_docx.Block).BlockType != lark_docx.DocxBlockTypeBullet &&
+				parent.(*lark_docx.Block).BlockType != lark_docx.DocxBlockTypeOrdered) {
 				break
 			}
 			indentLevel += 1
 			parent = p.blockMap.GetOrDefault(parent.(*lark_docx.Block).ParentId, nil)
 		}
-		buf.WriteString(strings.Repeat("  ", indentLevel-1))
+		buf.WriteString(strings.Repeat("    ", indentLevel-1))
 		buf.WriteString("1. ")
 		buf.WriteString(p.ParseDocxBlockText(b.Ordered))
 	case lark_docx.DocxBlockTypeCode:
@@ -136,7 +137,6 @@ func (p *Parser) ParseDocxBlock(b *lark_docx.Block) string {
 	case lark_docx.DocxBlockTypeQuote:
 		buf.WriteString("> ")
 		buf.WriteString(p.ParseDocxBlockText(b.Quote))
-		buf.WriteString("\n")
 	case lark_docx.DocxBlockTypeEquation:
 		buf.WriteString("$$\n")
 		buf.WriteString(p.ParseDocxBlockText(b.Equation))
@@ -248,7 +248,6 @@ func (p *Parser) ParseDocxBlockTableCell(blockId string) string {
 		// remove table cell children block from map
 		p.blockMap.Delete(block.BlockId)
 	}
-	contents = strings.Join(strings.Fields(strings.ReplaceAll(strings.TrimSpace(strip.StripTags(contents)), "\n", "<br/>")), " ")
 	return contents
 }
 
@@ -299,7 +298,6 @@ func (p *Parser) ParseDocxBlockQuoteContainer(blockId string, q *lark_docx.Quote
 		// remove quote container children block from map
 		p.blockMap.Delete(block.BlockId)
 	}
-	contents = strings.Join(strings.Fields(strings.ReplaceAll(strings.TrimSpace(strip.StripTags(contents)), "\n", "<br/>")), " ")
 	return contents
 }
 

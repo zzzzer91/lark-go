@@ -5,7 +5,6 @@ go 1.20
 require (
 	github.com/bytedance/sonic v1.8.8
 	github.com/elliotchance/orderedmap v1.5.0
-	github.com/grokify/html-strip-tags-go v0.0.1
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.8.1
