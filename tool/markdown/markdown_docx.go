@@ -201,8 +201,8 @@ func (p *Parser) ParseDocxTextElementTextRun(tr *lark_docx.TextRun) string {
 			buf.WriteString("*")
 			postWrite = "*"
 		} else if style.Strikethrough {
-			buf.WriteString("<del>")
-			postWrite = "</del>"
+			buf.WriteString("~~")
+			postWrite = "~~"
 		} else if style.Underline {
 			buf.WriteString("<u>")
 			postWrite = "</u>"
