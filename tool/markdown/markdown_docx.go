@@ -6,6 +6,7 @@ import (
 	"sync"
 
 	"github.com/olekukonko/tablewriter"
+	"github.com/zzzzer91/gopkg/urlx"
 	lark_docx "github.com/zzzzer91/lark-go/service/docx/v1"
 )
 
@@ -190,7 +191,7 @@ func parseDocxTextElement(sb *strings.Builder, e *lark_docx.TextElement) {
 		sb.WriteString("[")
 		sb.WriteString(*e.MentionDoc.Title)
 		sb.WriteString("](")
-		sb.WriteString(*e.MentionDoc.Url)
+		sb.WriteString(urlx.UnescapeURL(*e.MentionDoc.Url))
 		sb.WriteString(")")
 	}
 	if e.Equation != nil {
@@ -217,7 +218,7 @@ func parseDocxTextElementTextRun(sb *strings.Builder, tr *lark_docx.TextRun) {
 			postWrite = "`"
 		} else if link := style.Link; link != nil {
 			sb.WriteString("[")
-			postWrite = fmt.Sprintf("](%s)", *link.Url)
+			postWrite = fmt.Sprintf("](%s)", urlx.UnescapeURL(*link.Url))
 		}
 	}
 	sb.WriteString(tr.Content)
