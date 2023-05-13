@@ -227,7 +227,7 @@ func (p *docxParser) parseBlockTable(t *lark_docx.Table) {
 		p.sb.WriteString("\n")
 	}
 	// table 内容
-	for i := 0; i < rowSize; i++ {
+	for i := 1; i < rowSize; i++ {
 		p.sb.WriteString("|")
 		for j := 0; j < colSize; j++ {
 			p.parseTableCell(p.blockMap[blockIds[i*colSize+j]])
