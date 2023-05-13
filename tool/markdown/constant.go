@@ -1,6 +1,10 @@
 package lark_markdown
 
 const (
-	markdownIndentCount = 4
-	separator           = "\n\n"
+	stringBuilderInitSize = 8 * 1024
+)
+
+const (
+	markdownIndentSpaces = "    "
+	markdownSeparator   = "\n\n"
 )

@@ -1,12 +1,14 @@
 # lark go client
 
-An unofficial SDK for Lark (飞书).
+An unofficial Lark SDK that contains some commonly used APIs. It also includes some useful tools, such as converting Lark docx to markdown.
 
-## Usage
+## Basic Usage
 
 ```go
 appID, appSecret := "", ""
 larkService := lark.NewService(appID, appSecret, time.Second*5)
+
+// send msg
 larkService.SendMsgByOpenID("openID", lark.NewTextMsg("hello"))
 ```
 
