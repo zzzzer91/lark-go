@@ -1,15 +1,21 @@
 package lark_markdown
 
 import (
+	"bytes"
 	"strings"
 
 	"github.com/zzzzer91/gopkg/urlx"
 	lark_docx "github.com/zzzzer91/lark-go/service/docx/v1"
 )
 
-func ParseDocxContent(blocks []*lark_docx.Block) (string, []string) {
+func ParseDocxContent(blocks []*lark_docx.Block, opts ...Option) (string, []string) {
+	conf := newParserConfig()
+	for _, o := range opts {
+		o(conf)
+	}
 	p := &docxParser{
-		sb:       new(strings.Builder),
+		conf:     conf,
+		sb:       new(bytes.Buffer),
 		blockMap: make(map[string]*lark_docx.Block, len(blocks)),
 	}
 	p.sb.Grow(stringBuilderInitSize)
@@ -18,7 +24,8 @@ func ParseDocxContent(blocks []*lark_docx.Block) (string, []string) {
 }
 
 type docxParser struct {
-	sb        *strings.Builder
+	conf      *parserConfig
+	sb        *bytes.Buffer
 	blockMap  map[string]*lark_docx.Block
 	ImgTokens []string // 所有图片的 token
 }
@@ -195,6 +202,8 @@ func (p *docxParser) parseDocxTextElementTextRun(tr *lark_docx.TextRun) {
 
 func (p *docxParser) parseBlockImage(img *lark_docx.Image) {
 	p.sb.WriteString("![](")
+	p.sb.WriteString(p.conf.imagePath)
+	p.sb.WriteString("/")
 	p.sb.WriteString(img.Token)
 	p.sb.WriteString(")")
 	p.ImgTokens = append(p.ImgTokens, img.Token)
