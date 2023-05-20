@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	appID, appSecret = "", ""
+	appID, appSecret = os.Getenv("LARK_APP_ID"), os.Getenv("LARK_APP_SECRET")
 	cli              = lark_core.NewClient(appID, appSecret, time.Second*5)
 	svc              = lark_docx.NewService(cli)
 )
