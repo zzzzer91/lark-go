@@ -2,6 +2,7 @@ package lark_core
 
 import (
 	"context"
+	"io"
 	"sync/atomic"
 	"time"
 
@@ -99,7 +100,7 @@ func (lc *Client) GetJson(ctx context.Context, url string, out json.CodeMsgIface
 }
 
 func (lc *Client) PostJson(ctx context.Context, url string, data interface{}, out json.CodeMsgIface) error {
-	resp, err := lc.cli.PostJsonWithAuth(ctx, url, data, lc.getTenantAccessToken())
+	resp, err := lc.cli.PostJsonWithAuth(ctx, url, lc.getTenantAccessToken(), data)
 	if err != nil {
 		return err
 	}
@@ -108,4 +109,12 @@ func (lc *Client) PostJson(ctx context.Context, url string, data interface{}, ou
 		return err
 	}
 	return nil
+}
+
+func (lc *Client) Download(ctx context.Context, url string) (io.ReadCloser, error) {
+	resp, err := lc.cli.GetWithAuth(ctx, url, lc.getTenantAccessToken())
+	if err != nil {
+		return nil, err
+	}
+	return resp.Body, nil
 }
