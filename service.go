@@ -20,9 +20,10 @@ type LarkService interface {
 func NewService(appID, appSecret string, timeout time.Duration) LarkService {
 	cli := lark_core.NewClient(appID, appSecret, timeout)
 	return &larkServiceImpl{
-		ImService:   lark_im.NewService(cli),
-		DocxService: lark_docx.NewService(cli),
-		WikiService: lark_wiki.NewService(cli),
+		ImService:     lark_im.NewService(cli),
+		DocxService:   lark_docx.NewService(cli),
+		WikiService:   lark_wiki.NewService(cli),
+		DriverService: lark_driver.NewService(cli),
 	}
 }
 
