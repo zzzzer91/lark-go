@@ -10,7 +10,7 @@ func newParserConfig() *parserConfig {
 
 type Option func(s *parserConfig)
 
-func WithImageHost(imagePath string) Option {
+func WithImagePath(imagePath string) Option {
 	return func(s *parserConfig) {
 		s.imagePath = imagePath
 	}
