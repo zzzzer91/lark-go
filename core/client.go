@@ -111,10 +111,10 @@ func (lc *Client) PostJson(ctx context.Context, url string, data interface{}, ou
 	return nil
 }
 
-func (lc *Client) Download(ctx context.Context, url string) (io.ReadCloser, error) {
+func (lc *Client) Download(ctx context.Context, url string) (io.ReadCloser, string, error) {
 	resp, err := lc.cli.GetWithAuth(ctx, url, lc.getTenantAccessToken())
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
-	return resp.Body, nil
+	return resp.Body, resp.Header.Get("Content-Type"), nil
 }

@@ -2,6 +2,7 @@ package lark_driver
 
 import (
 	"context"
+	"io"
 	"os"
 	"testing"
 	"time"
@@ -18,6 +19,10 @@ var (
 
 func Test_DownloadMedia(t *testing.T) {
 	fileToken := ""
-	_, err := svc.DownloadMedia(context.Background(), fileToken)
+	content, _, err := svc.DownloadMedia(context.Background(), fileToken)
 	assert.Nil(t, err)
+	assert.NotNil(t, content)
+
+	f, _ := os.OpenFile("test.png", os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
+	io.Copy(f, content)
 }
