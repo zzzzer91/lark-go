@@ -203,12 +203,12 @@ func (p *docxParser) parseDocxTextElementTextRun(tr *lark_docx.TextRun) {
 
 func (p *docxParser) parseBlockImage(img *lark_docx.Image) {
 	if p.cfg.isEnableHtml {
-		p.sb.WriteString(`<p align="center"><img src="`)
+		p.sb.WriteString(`<div align="center"><img src="`)
 		p.sb.WriteString(p.cfg.imagePath)
 		p.sb.WriteString("/")
 		p.sb.WriteString(img.Token)
 		p.sb.WriteString(fmt.Sprintf(`" width="%d" height="%d">`, img.Width, img.Height))
-		p.sb.WriteString("</p>")
+		p.sb.WriteString("</div>")
 	} else {
 		p.sb.WriteString("![](")
 		p.sb.WriteString(p.cfg.imagePath)
