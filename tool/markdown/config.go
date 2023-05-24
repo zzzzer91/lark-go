@@ -1,17 +1,24 @@
 package lark_markdown
 
 type parserConfig struct {
-	imagePath string
+	imagePath    string
+	isEnableHtml bool
 }
 
 func newParserConfig() *parserConfig {
 	return &parserConfig{}
 }
 
-type Option func(s *parserConfig)
+type Option func(cfg *parserConfig)
 
 func WithImagePath(imagePath string) Option {
-	return func(s *parserConfig) {
-		s.imagePath = imagePath
+	return func(cfg *parserConfig) {
+		cfg.imagePath = imagePath
+	}
+}
+
+func WithIsEnableHtml(flag bool) Option {
+	return func(cfg *parserConfig) {
+		cfg.isEnableHtml = flag
 	}
 }

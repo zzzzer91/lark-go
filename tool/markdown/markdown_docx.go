@@ -2,6 +2,7 @@ package lark_markdown
 
 import (
 	"bytes"
+	"fmt"
 	"strings"
 
 	"github.com/zzzzer91/gopkg/urlx"
@@ -14,7 +15,7 @@ func ParseDocxContent(blocks []*lark_docx.Block, opts ...Option) (string, []stri
 		o(conf)
 	}
 	p := &docxParser{
-		conf:     conf,
+		cfg:      conf,
 		sb:       new(bytes.Buffer),
 		blockMap: make(map[string]*lark_docx.Block, len(blocks)),
 	}
@@ -24,7 +25,7 @@ func ParseDocxContent(blocks []*lark_docx.Block, opts ...Option) (string, []stri
 }
 
 type docxParser struct {
-	conf      *parserConfig
+	cfg       *parserConfig
 	sb        *bytes.Buffer
 	blockMap  map[string]*lark_docx.Block
 	ImgTokens []string // 所有图片的 token
@@ -201,11 +202,20 @@ func (p *docxParser) parseDocxTextElementTextRun(tr *lark_docx.TextRun) {
 }
 
 func (p *docxParser) parseBlockImage(img *lark_docx.Image) {
-	p.sb.WriteString("![](")
-	p.sb.WriteString(p.conf.imagePath)
-	p.sb.WriteString("/")
-	p.sb.WriteString(img.Token)
-	p.sb.WriteString(")")
+	if p.cfg.isEnableHtml {
+		p.sb.WriteString(`<p align="center"><img src="`)
+		p.sb.WriteString(p.cfg.imagePath)
+		p.sb.WriteString("/")
+		p.sb.WriteString(img.Token)
+		p.sb.WriteString(fmt.Sprintf(`" width="%d" height="%d">`, img.Width, img.Height))
+		p.sb.WriteString("</p>")
+	} else {
+		p.sb.WriteString("![](")
+		p.sb.WriteString(p.cfg.imagePath)
+		p.sb.WriteString("/")
+		p.sb.WriteString(img.Token)
+		p.sb.WriteString(")")
+	}
 	p.ImgTokens = append(p.ImgTokens, img.Token)
 }
 
