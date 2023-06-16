@@ -17,6 +17,13 @@ type LarkService interface {
 	lark_driver.DriverService
 }
 
+type larkServiceImpl struct {
+	lark_im.ImService
+	lark_docx.DocxService
+	lark_wiki.WikiService
+	lark_driver.DriverService
+}
+
 func NewService(appID, appSecret string, timeout time.Duration) LarkService {
 	cli := lark_core.NewClient(appID, appSecret, timeout)
 	return &larkServiceImpl{
@@ -27,9 +34,18 @@ func NewService(appID, appSecret string, timeout time.Duration) LarkService {
 	}
 }
 
-type larkServiceImpl struct {
+type larkServiceMock struct {
 	lark_im.ImService
 	lark_docx.DocxService
 	lark_wiki.WikiService
 	lark_driver.DriverService
+}
+
+func NewServiceMock() LarkService {
+	return &larkServiceMock{
+		ImService:     lark_im.NewServiceMock(),
+		DocxService:   lark_docx.NewServiceMock(),
+		WikiService:   lark_wiki.NewServiceMock(),
+		DriverService: lark_driver.NewServiceMock(),
+	}
 }
