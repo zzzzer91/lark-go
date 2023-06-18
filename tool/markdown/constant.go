@@ -1,4 +1,4 @@
-package lark_markdown
+package markdown
 
 const (
 	stringBuilderInitSize = 8 * 1024

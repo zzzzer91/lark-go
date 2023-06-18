@@ -1,4 +1,4 @@
-package lark_driver
+package driver
 
 import (
 	lark_core "github.com/zzzzer91/lark-go/core"

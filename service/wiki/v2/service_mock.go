@@ -1,4 +1,4 @@
-package lark_wiki
+package wiki
 
 import "context"
 

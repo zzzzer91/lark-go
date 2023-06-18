@@ -1,4 +1,4 @@
-package lark_event
+package event
 
 const (
 	MsgTypeChallengeFlag = "url_verification"

@@ -1,4 +1,4 @@
-package lark_core
+package core
 
 const (
 	UrlBasic = "https://open.feishu.cn/open-apis"

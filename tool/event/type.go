@@ -1,4 +1,4 @@
-package lark_event
+package event
 
 type (
 	// refer: https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/reference/im-v1/message/events/receive

@@ -1,4 +1,4 @@
-package lark_wiki
+package wiki
 
 import lark_core "github.com/zzzzer91/lark-go/core"
 

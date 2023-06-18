@@ -1,4 +1,4 @@
-package lark_docx
+package docx
 
 import (
 	"context"

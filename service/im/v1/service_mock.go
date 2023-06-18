@@ -1,4 +1,4 @@
-package lark_im
+package im
 
 import "context"
 

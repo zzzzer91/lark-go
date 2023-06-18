@@ -1,4 +1,4 @@
-package lark_core
+package core
 
 import (
 	"context"

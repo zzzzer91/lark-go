@@ -1,4 +1,4 @@
-package lark_event
+package event
 
 func IsChallengeStage(tp string) bool {
 	return tp == MsgTypeChallengeFlag

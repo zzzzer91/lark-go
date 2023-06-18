@@ -1,4 +1,4 @@
-package lark_markdown
+package markdown
 
 import (
 	"context"

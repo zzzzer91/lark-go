@@ -1,4 +1,4 @@
-package lark_markdown
+package markdown
 
 type parserConfig struct {
 	imagePath    string

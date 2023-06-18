@@ -1,4 +1,4 @@
-package lark_driver
+package driver
 
 import (
 	"context"
