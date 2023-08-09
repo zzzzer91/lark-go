@@ -25,10 +25,10 @@ github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKs
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
 github.com/twitchyliquid64/golang-asm v0.15.1 h1:SU5vSMR7hnwNxj24w34ZyCi/FmDZTkS4MhqMhdFk5YI=
 github.com/twitchyliquid64/golang-asm v0.15.1/go.mod h1:a1lVb/DtPvCB8fslRZhAngC2+aY1QWCk3Cedj/Gdt08=
-github.com/zzzzer91/gopkg v0.0.0-20230505041801-df9aeca8ee0a h1:6DT4ShsBKzAwPHEJ+idGrDwwpupJ1o6CJHCPIEegtE4=
-github.com/zzzzer91/gopkg v0.0.0-20230505041801-df9aeca8ee0a/go.mod h1:BwLbYdJcx967Qgl11iPNJhxvrG2xBJDhCbkMREZwCHo=
-github.com/zzzzer91/httpgo v1.2.1 h1:EzFiVBq8hz1A01Jat8gvMAGj1DH+JeV3MI2bSwOqSxQ=
-github.com/zzzzer91/httpgo v1.2.1/go.mod h1:S1RThqxrxkxJGfPkWNxDnX/FL7C790eCTomqRyqEEo8=
+github.com/zzzzer91/gopkg v0.0.0-20230809092606-a68c6622474f h1:NV4KErAJuSlyE14Y5OFEL8jSa6d7i88KW0lWITIY1ZI=
+github.com/zzzzer91/gopkg v0.0.0-20230809092606-a68c6622474f/go.mod h1:SZtEj+IMvL+ucxlKIaWtyKPOiI6fPlObErJw9APn8+M=
+github.com/zzzzer91/httpgo v0.0.0-20230809093432-78f485b2867d h1:2uGMbZNebJOhPH7ywdqw+/7kfMFTuCCKDUOAR+5BbM0=
+github.com/zzzzer91/httpgo v0.0.0-20230809093432-78f485b2867d/go.mod h1:YdW7dPr/RuLPGDQZBk4d/rpQeXAfxknuUdgc035OqKE=
 go.uber.org/atomic v1.7.0 h1:ADUqmZGgLDDfbSL9ZmPxKTybcoEYHgpYfELNoN+7hsw=
 go.uber.org/atomic v1.7.0/go.mod h1:fEN4uk6kAWBTFdckzkM89CLk9XfWZrxpCo0nPH17wJc=
 go.uber.org/goleak v1.1.11 h1:wy28qYRKZgnJTxGxvye5/wgWr1EKjmUDGYox5mGlRlI=

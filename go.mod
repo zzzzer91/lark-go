@@ -1,13 +1,13 @@
 module github.com/zzzzer91/lark-go
 
-go 1.19
+go 1.20
 
 require (
 	github.com/bytedance/sonic v1.8.8
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.8.1
-	github.com/zzzzer91/gopkg v0.0.0-20230505041801-df9aeca8ee0a
-	github.com/zzzzer91/httpgo v1.2.1
+	github.com/zzzzer91/gopkg v0.0.0-20230809092606-a68c6622474f
+	github.com/zzzzer91/httpgo v0.0.0-20230809093432-78f485b2867d
 )
 
 require (
